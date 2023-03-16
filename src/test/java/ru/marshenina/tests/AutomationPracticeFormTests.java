@@ -1,9 +1,15 @@
 package ru.marshenina.tests;
 
 import org.junit.jupiter.api.Test;
+import ru.marshenina.pages.RegistrationPage;
+
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Selenide.$;
 
 
 public class AutomationPracticeFormTests extends TestBase {
+
+    RegistrationPage registrationPage = new RegistrationPage();
 
     @Test
     void fillFormTest() {
@@ -23,6 +29,7 @@ public class AutomationPracticeFormTests extends TestBase {
                 city = "Delhi";
 
         registrationPage.openPage()
+                .removeBanner()
                 .setFirstName(firstName)
                 .setLastName(lastName)
                 .setEmail(email)
@@ -38,16 +45,16 @@ public class AutomationPracticeFormTests extends TestBase {
 
         registrationPage.clickSubmitButton();
 
-        registrationPage.verifyModalAppears()
-                .verifyResults("Student Name", firstName + " " + lastName)
-                .verifyResults("Student Email", email)
-                .verifyResults("Gender", gender)
-                .verifyResults("Mobile", phone)
-                .verifyResults("Date of Birth", birthDay + " " + birthMonth + "," + birthYear)
-                .verifyResults("Subjects", subject)
-                .verifyResults("Hobbies", hobby)
-                .verifyResults("Address", currentAddress)
-                .verifyResults("State and City", state + " " + city);
+        $(".modal-body").shouldHave(text("Student Name " + firstName + " " + lastName));
+        $(".modal-body").shouldHave(text("Student Email " + email));
+        $(".modal-body").shouldHave(text("Gender " + gender));
+        $(".modal-body").shouldHave(text("Mobile " + phone));
+        $(".modal-body").shouldHave(text("Date of Birth " + birthDay + " " + birthMonth + "," + birthYear));
+        $(".modal-body").shouldHave(text("Subjects " + subject));
+        $(".modal-body").shouldHave(text("Hobbies " + hobby));
+        $(".modal-body").shouldHave(text("Picture photo.png"));
+        $(".modal-body").shouldHave(text("Address " + currentAddress));
+        $(".modal-body").shouldHave(text("State and City " + state + " " + city));
 
     }
 }

@@ -2,7 +2,6 @@ package ru.marshenina.pages;
 
 import com.codeborne.selenide.SelenideElement;
 import ru.marshenina.pages.components.CalendarComponent;
-import ru.marshenina.pages.components.RegistrationResultsModal;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
@@ -10,10 +9,9 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class RegistrationPage {
     CalendarComponent calendarComponent = new CalendarComponent();
-    RegistrationResultsModal registrationResultsModal = new RegistrationResultsModal();
 
     private final String TITLE_TEXT = "Student Registration Form";
-    private SelenideElement firstNameInput = $("#firstName"),
+    private final SelenideElement firstNameInput = $("#firstName"),
             lastNameInput = $("#lastName"),
             emailInput = $("#userEmail"),
             genderInput = $("#genterWrapper"),
@@ -30,33 +28,32 @@ public class RegistrationPage {
     public RegistrationPage openPage() {
         open("/automation-practice-form");
         $(".practice-form-wrapper").shouldHave(text(TITLE_TEXT));
+        return this;
+    }
+
+    public RegistrationPage removeBanner() {
         executeJavaScript("$('#fixedban').remove()");
         executeJavaScript("$('footer').remove()");
-
         return this;
     }
 
     public RegistrationPage setFirstName(String value) {
         firstNameInput.setValue(value);
-
         return this;
     }
 
     public RegistrationPage setLastName(String value) {
         lastNameInput.setValue(value);
-
         return this;
     }
 
     public RegistrationPage setEmail(String value) {
         emailInput.setValue(value);
-
         return this;
     }
 
     public RegistrationPage setGender(String value) {
         genderInput.$(byText(value)).click();
-
         return this;
     }
 
@@ -68,16 +65,6 @@ public class RegistrationPage {
     public RegistrationPage setBirthDate(String day, String month, String year) {
         dateOfBirthInput.click();
         calendarComponent.setDate(day, month, year);
-        return this;
-    }
-
-    public RegistrationPage verifyModalAppears() {
-        registrationResultsModal.verifyModalAppears();
-        return this;
-    }
-
-    public RegistrationPage verifyResults(String key, String value) {
-        registrationResultsModal.verifyResults(key, value);
         return this;
     }
 
