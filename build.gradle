@@ -11,13 +11,17 @@ compileTestJava {
 }
 
 dependencies {
-    // Selenide
-    testImplementation("com.codeborne:selenide:6.10.2")
-    testRuntimeOnly("org.slf4j:slf4j-simple:2.0.3")
+    implementation 'org.jetbrains:annotations:20.1.0'
+    testImplementation (
+            "com.codeborne:selenide:6.11.2",
+            "com.github.javafaker:javafaker:1.0.2",
+            "org.junit.jupiter:junit-jupiter:5.9.2",
+            "org.slf4j:slf4j-simple:2.0.6"
+    )
+    testRuntimeOnly(
+            "org.slf4j:slf4j-simple:2.0.3",
+            "org.junit.jupiter:junit-jupiter-engine:5.9.1")
 
-    // JUnit 5
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.1")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.1")
 }
 
 test {

@@ -6,8 +6,6 @@ import ru.marshenina.pages.RegistrationPage;
 
 public class TestBase {
 
-    RegistrationPage registrationPage = new RegistrationPage();
-
     @BeforeAll
     static void beforeAll() {
         Configuration.browserSize = "1920x1080";

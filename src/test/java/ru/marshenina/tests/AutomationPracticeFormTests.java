@@ -1,53 +1,65 @@
 package ru.marshenina.tests;
 
 import org.junit.jupiter.api.Test;
+import ru.marshenina.pages.RegistrationPage;
+
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Selenide.$;
+import static ru.marshenina.utils.RandomUtils.*;
 
 
 public class AutomationPracticeFormTests extends TestBase {
 
+    RegistrationPage registrationPage = new RegistrationPage();
+
     @Test
     void fillFormTest() {
-        String firstName = "Valeriia",
-                lastName = "Marshenina",
-                email = "valeriia@marshenina.com",
-                gender = "Female",
-                phone = "1234567890",
-                birthDay = "28",
-                birthMonth = "August",
-                birthYear = "1988",
-                subject = "Maths",
-                hobby = "Reading",
-                picture = "file/photo.png",
-                currentAddress = "Syzran",
-                state = "NCR",
-                city = "Delhi";
+
+        String[] genders = {"Male", "Female", "Other"};
+        String[] hobbies = {"Sports", "Reading", "Music"};
+
+        String userFirstName = getRandomFirstName(),
+                userLastName = getRandomLastName(),
+                userEmail = getRandomEmail(),
+                userGender = getRandomItemFromArray(genders),
+                userPhone = getRandomPhone(),
+                userBirthDay = "28",
+                userBirthMonth = "August",
+                userBirthYear = "1988",
+                userSubject = "Maths",
+                userHobby = getRandomItemFromArray(hobbies),
+                userPicture = "file/photo.png",
+                userCurrentAddress = getRandomAddress(),
+                userState = "NCR",
+                userCity = "Delhi";
 
         registrationPage.openPage()
-                .setFirstName(firstName)
-                .setLastName(lastName)
-                .setEmail(email)
-                .setGender(gender)
-                .setPhone(phone)
-                .setBirthDate(birthDay, birthMonth, birthYear)
-                .setSubject(subject)
-                .setHobby(hobby)
-                .uploadPicture(picture)
-                .setCurrentAddress(currentAddress)
-                .setState(state)
-                .setCity(city);
+                .removeBanner()
+                .setFirstName(userFirstName)
+                .setLastName(userLastName)
+                .setEmail(userEmail)
+                .setGender(userGender)
+                .setPhone(userPhone)
+                .setBirthDate(userBirthDay, userBirthMonth, userBirthYear)
+                .setSubject(userSubject)
+                .setHobby(userHobby)
+                .uploadPicture(userPicture)
+                .setCurrentAddress(userCurrentAddress)
+                .setState(userState)
+                .setCity(userCity);
 
         registrationPage.clickSubmitButton();
 
-        registrationPage.verifyModalAppears()
-                .verifyResults("Student Name", firstName + " " + lastName)
-                .verifyResults("Student Email", email)
-                .verifyResults("Gender", gender)
-                .verifyResults("Mobile", phone)
-                .verifyResults("Date of Birth", birthDay + " " + birthMonth + "," + birthYear)
-                .verifyResults("Subjects", subject)
-                .verifyResults("Hobbies", hobby)
-                .verifyResults("Address", currentAddress)
-                .verifyResults("State and City", state + " " + city);
+        $(".modal-body").shouldHave(text("Student Name " + userFirstName + " " + userLastName));
+        $(".modal-body").shouldHave(text("Student Email " + userEmail));
+        $(".modal-body").shouldHave(text("Gender " + userGender));
+        $(".modal-body").shouldHave(text("Mobile " + userPhone));
+        $(".modal-body").shouldHave(text("Date of Birth " + userBirthDay + " " + userBirthMonth + "," + userBirthYear));
+        $(".modal-body").shouldHave(text("Subjects " + userSubject));
+        $(".modal-body").shouldHave(text("Hobbies " + userHobby));
+        $(".modal-body").shouldHave(text("Picture photo.png"));
+        $(".modal-body").shouldHave(text("Address " + userCurrentAddress));
+        $(".modal-body").shouldHave(text("State and City " + userState + " " + userCity));
 
     }
 }
