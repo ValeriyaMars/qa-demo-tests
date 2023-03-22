@@ -5,7 +5,7 @@ import ru.marshenina.pages.RegistrationPage;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
-import static ru.marshenina.utils.RandomUtils.*;
+import static ru.marshenina.tests.TestData.*;
 
 
 public class AutomationPracticeFormTests extends TestBase {
@@ -14,24 +14,6 @@ public class AutomationPracticeFormTests extends TestBase {
 
     @Test
     void fillFormTest() {
-
-        String[] genders = {"Male", "Female", "Other"};
-        String[] hobbies = {"Sports", "Reading", "Music"};
-
-        String userFirstName = getRandomFirstName(),
-                userLastName = getRandomLastName(),
-                userEmail = getRandomEmail(),
-                userGender = getRandomItemFromArray(genders),
-                userPhone = getRandomPhone(),
-                userBirthDay = "28",
-                userBirthMonth = "August",
-                userBirthYear = "1988",
-                userSubject = "Maths",
-                userHobby = getRandomItemFromArray(hobbies),
-                userPicture = "file/photo.png",
-                userCurrentAddress = getRandomAddress(),
-                userState = "NCR",
-                userCity = "Delhi";
 
         registrationPage.openPage()
                 .removeBanner()
@@ -62,4 +44,5 @@ public class AutomationPracticeFormTests extends TestBase {
         $(".modal-body").shouldHave(text("State and City " + userState + " " + userCity));
 
     }
+
 }
