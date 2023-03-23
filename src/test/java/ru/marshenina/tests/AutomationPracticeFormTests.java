@@ -5,7 +5,7 @@ import ru.marshenina.pages.RegistrationPage;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
-import static ru.marshenina.tests.TestData.*;
+import static ru.marshenina.utils.RandomStudent.*;
 
 
 public class AutomationPracticeFormTests extends TestBase {
@@ -14,6 +14,21 @@ public class AutomationPracticeFormTests extends TestBase {
 
     @Test
     void fillFormTest() {
+
+        String userFirstName = getRandomFirstName(),
+                userLastName = getRandomLastName(),
+                userEmail = getRandomEmail(),
+                userGender = getRandomGender(),
+                userPhone = getRandomPhone(),
+                userBirthMonth = getRandomBirthMonth(),
+                userBirthYear = getRandomBirthYear(),
+                userBirthDay = getRandomBirthDay(),
+                userSubject = getRandomSubject(),
+                userHobby = getRandomHobby(),
+                userPicture = getFileName(),
+                userCurrentAddress = getRandomAddress(),
+                userState = getRandomState(),
+                userCity = getRandomState(userState);
 
         registrationPage.openPage()
                 .removeBanner()
@@ -42,7 +57,5 @@ public class AutomationPracticeFormTests extends TestBase {
         $(".modal-body").shouldHave(text("Picture photo.png"));
         $(".modal-body").shouldHave(text("Address " + userCurrentAddress));
         $(".modal-body").shouldHave(text("State and City " + userState + " " + userCity));
-
     }
-
 }
