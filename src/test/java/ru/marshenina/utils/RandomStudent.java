@@ -10,28 +10,28 @@ import java.util.Map;
 import static java.lang.String.valueOf;
 
 public class RandomStudent {
+    private static Faker faker = new Faker();
+    static Date fakerDateOfBirthday = faker.date().birthday();
 
     public static String getRandomFirstName() {
-        return new Faker().name().firstName();
+        return faker.name().firstName();
     }
 
     public static String getRandomLastName() {
-        return new Faker().name().lastName();
+        return faker.name().lastName();
     }
 
     public static String getRandomEmail() {
-        return new Faker().internet().emailAddress();
+        return faker.internet().emailAddress();
     }
 
     public static String getRandomGender() {
-        return new Faker().options().option("Male", "Female", "Other");
+        return faker.options().option("Male", "Female", "Other");
     }
 
     public static String getRandomPhone() {
-        return new Faker().number().digits(10);
+        return faker.number().digits(10);
     }
-
-    static Date fakerDateOfBirthday = new Faker().date().birthday();
 
     public static String getRandomBirthMonth() {
         return new SimpleDateFormat("MMMM", Locale.ENGLISH).format(fakerDateOfBirthday);
@@ -46,20 +46,24 @@ public class RandomStudent {
     }
 
     public static String getRandomSubject() {
-        return new Faker().options().option("Accounting", "Maths", "Arts", "English", "Physics", "Chemistry",
+        return faker.options().option("Accounting", "Maths", "Arts", "English", "Physics", "Chemistry",
                 "Computer Science", "Economics", "Social Studies", "History", "Civics", "Commerce", "Hindi", "Biology");
     }
 
     public static String getRandomHobby() {
-        return new Faker().options().option("Sports", "Reading", "Music");
+        return faker.options().option("Sports", "Reading", "Music");
     }
 
     public static String getFileName() {
-        return "file/photo.png";
+        return "photo.png";
+    }
+
+    public static String getFullPath(String name) {
+        return "file/" + name;
     }
 
     public static String getRandomAddress() {
-        return new Faker().address().fullAddress();
+        return faker.address().fullAddress();
     }
 
     static Map<String, String[]> mapStateWithCity = Map.of(
@@ -69,15 +73,13 @@ public class RandomStudent {
             "Rajasthan", new String[]{"Jaipur", "Jaiselmer"}
     );
 
-    static String state;
-
     public static String getRandomState() {
-        state = new Faker().options().option(mapStateWithCity.keySet().toArray()).toString();
+        String state = faker.options().option(mapStateWithCity.keySet().toArray()).toString();
         return state;
     }
 
     public static String getRandomState(String state) {
-        return new Faker().options().option(mapStateWithCity.get(state));
+        return faker.options().option(mapStateWithCity.get(state));
     }
 
 }

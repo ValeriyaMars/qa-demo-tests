@@ -23,7 +23,8 @@ public class RegistrationPage {
             currentAddressInput = $("#currentAddress"),
             stateInput = $("#state"),
             cityInput = $("#city"),
-            submitButton = $("#submit");
+            submitButton = $("#submit"),
+            modalWindow = $(".modal-body");
 
     public RegistrationPage openPage() {
         open("/automation-practice-form");
@@ -102,5 +103,10 @@ public class RegistrationPage {
 
     public void clickSubmitButton() {
         submitButton.click();
+    }
+
+    public RegistrationPage verifyResult(String text) {
+        modalWindow.shouldHave(text(text));
+        return this;
     }
 }
