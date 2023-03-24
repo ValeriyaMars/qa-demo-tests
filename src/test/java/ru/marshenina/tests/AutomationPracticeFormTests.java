@@ -3,8 +3,6 @@ package ru.marshenina.tests;
 import org.junit.jupiter.api.Test;
 import ru.marshenina.pages.RegistrationPage;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.$;
 import static ru.marshenina.utils.RandomStudent.*;
 
 
@@ -25,7 +23,6 @@ public class AutomationPracticeFormTests extends TestBase {
                 userBirthDay = getRandomBirthDay(),
                 userSubject = getRandomSubject(),
                 userHobby = getRandomHobby(),
-                userPicture = getFileName(),
                 userCurrentAddress = getRandomAddress(),
                 userState = getRandomState(),
                 userCity = getRandomState(userState);
@@ -40,22 +37,22 @@ public class AutomationPracticeFormTests extends TestBase {
                 .setBirthDate(userBirthDay, userBirthMonth, userBirthYear)
                 .setSubject(userSubject)
                 .setHobby(userHobby)
-                .uploadPicture(userPicture)
+                .uploadPicture(getFullPath(getFileName()))
                 .setCurrentAddress(userCurrentAddress)
                 .setState(userState)
                 .setCity(userCity);
 
         registrationPage.clickSubmitButton();
 
-        $(".modal-body").shouldHave(text("Student Name " + userFirstName + " " + userLastName));
-        $(".modal-body").shouldHave(text("Student Email " + userEmail));
-        $(".modal-body").shouldHave(text("Gender " + userGender));
-        $(".modal-body").shouldHave(text("Mobile " + userPhone));
-        $(".modal-body").shouldHave(text("Date of Birth " + userBirthDay + " " + userBirthMonth + "," + userBirthYear));
-        $(".modal-body").shouldHave(text("Subjects " + userSubject));
-        $(".modal-body").shouldHave(text("Hobbies " + userHobby));
-        $(".modal-body").shouldHave(text("Picture photo.png"));
-        $(".modal-body").shouldHave(text("Address " + userCurrentAddress));
-        $(".modal-body").shouldHave(text("State and City " + userState + " " + userCity));
+        registrationPage.verifyResult("Student Name " + userFirstName + " " + userLastName)
+                .verifyResult("Student Email " + userEmail)
+                .verifyResult("Gender " + userGender)
+                .verifyResult("Mobile " + userPhone)
+                .verifyResult("Date of Birth " + userBirthDay + " " + userBirthMonth + "," + userBirthYear)
+                .verifyResult("Subjects " + userSubject)
+                .verifyResult("Hobbies " + userHobby)
+                .verifyResult(getFileName())
+                .verifyResult("Address " + userCurrentAddress)
+                .verifyResult("State and City " + userState + " " + userCity);
     }
 }
