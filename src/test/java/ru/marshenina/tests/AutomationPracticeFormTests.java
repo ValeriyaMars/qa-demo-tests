@@ -1,5 +1,9 @@
 package ru.marshenina.tests;
 
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.*;
+import io.qameta.allure.selenide.AllureSelenide;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import ru.marshenina.pages.RegistrationPage;
 
@@ -11,7 +15,14 @@ public class AutomationPracticeFormTests extends TestBase {
     RegistrationPage registrationPage = new RegistrationPage();
 
     @Test
+    @Feature("Регистрационная форма")
+    @Owner("ValeriyaMars")
+    @Severity(SeverityLevel.BLOCKER)
+    @Link(value = "Student Registration Form", url = "https://demoqa.com/automation-practice-form")
+    @DisplayName("Заполнение всех полей в форме регистрации")
     void fillFormTest() {
+
+        SelenideLogger.addListener("allure", new AllureSelenide());
 
         String userFirstName = getRandomFirstName(),
                 userLastName = getRandomLastName(),
