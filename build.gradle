@@ -50,3 +50,9 @@ test {
     systemProperty "chromeoptions.prefs", "intl.accept_languages=en"
     useJUnitPlatform()
 }
+
+task registration_form_tests(type: Test){
+    useJUnitPlatform(){
+        includeTags("Registration form")
+    }
+}
