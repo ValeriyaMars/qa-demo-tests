@@ -10,7 +10,7 @@ import ru.marshenina.pages.RegistrationPage;
 
 import static ru.marshenina.utils.RandomStudent.*;
 
-@Tag("Registration form")
+@Tag("registration_form")
 public class AutomationPracticeFormTests extends TestBase {
 
     RegistrationPage registrationPage = new RegistrationPage();
