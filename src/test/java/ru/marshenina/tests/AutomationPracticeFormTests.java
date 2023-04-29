@@ -23,8 +23,6 @@ public class AutomationPracticeFormTests extends TestBase {
     @DisplayName("Заполнение всех полей в форме регистрации")
     void fillFormTest() {
 
-        SelenideLogger.addListener("allure", new AllureSelenide());
-
         String userFirstName = getRandomFirstName(),
                 userLastName = getRandomLastName(),
                 userEmail = getRandomEmail(),
