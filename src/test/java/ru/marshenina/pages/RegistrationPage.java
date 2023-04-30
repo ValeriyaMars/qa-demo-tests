@@ -1,5 +1,6 @@
 package ru.marshenina.pages;
 
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import ru.marshenina.pages.components.CalendarComponent;
