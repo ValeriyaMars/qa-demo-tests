@@ -3,12 +3,13 @@ package ru.marshenina.pages;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import ru.marshenina.pages.components.CalendarComponent;
+import ru.marshenina.tests.TestBase;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
-public class RegistrationPage {
+public class RegistrationPage extends TestBase {
     CalendarComponent calendarComponent = new CalendarComponent();
 
     private final String TITLE_TEXT = "Student Registration Form";
